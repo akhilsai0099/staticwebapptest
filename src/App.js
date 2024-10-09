@@ -11,7 +11,12 @@ function App() {
     })();
   });
 
-  return <div>{data}</div>;
+  return (
+    <>
+      <div>hello from client:{data}</div>
+      <h1>Changes pushed to git</h1>
+    </>
+  );
 }
 
 export default App;

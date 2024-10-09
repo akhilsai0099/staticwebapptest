@@ -1,0 +1,48 @@
+# Define the Post type with fields for id, title, content, author, and likes
+type Post {
+  id: ID!
+  title: String!
+  content: String!
+  author: Author!
+  likes: Int! # Added likes field to track the number of likes
+}
+
+# Define the Author type with fields for id, name, and a list of posts they've written
+type Author {
+  id: ID!
+  name: String!
+  posts: [Post!]!
+}
+
+# Define the Query type, which is the entry point for reading data
+type Query {
+  # Fetch all posts
+  posts: [Post!]!
+
+  # Fetch a specific post by its ID
+  post(id: ID!): Post
+
+  # Fetch all authors
+  authors: [Author!]!
+
+  # Fetch a specific author by their ID
+  author(id: ID!): Author
+}
+
+# Define the Mutation type, which is the entry point for modifying data
+type Mutation {
+  # Create a new post
+  createPost(title: String!, content: String!, authorId: ID!): Post!
+
+  # Create a new author
+  createAuthor(name: String!): Author!
+
+  # Increment the number of likes for a post
+  likePost(id: ID!): Post! # Added a mutation to like a post
+}
+
+# The schema entry points for both queries and mutations
+schema {
+  query: Query
+  mutation: Mutation
+}
